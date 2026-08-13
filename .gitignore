@@ -1,0 +1,6 @@
+# Ambiente virtual local
+.venv/
+
+# Artefatos gerados pelo Python
+__pycache__/
+*.py[cod]

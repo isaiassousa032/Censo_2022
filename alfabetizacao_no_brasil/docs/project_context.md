@@ -83,6 +83,9 @@ Nesta etapa, não serão incluídos:
 - A observação de um mapa não será tratada como evidência de clusters estatísticos.
 - A categoria indígena representa o quesito de cor ou raça das tabelas selecionadas e não equivale à definição ampliada das divulgações específicas sobre população indígena.
 - Novos cruzamentos, tecnologias e estruturas somente serão adicionados quando uma pergunta analítica concreta os justificar.
+- O primeiro módulo será mantido em `alfabetizacao_no_brasil/`, de forma isolada dos futuros estudos do projeto guarda-chuva.
+- Os arquivos brutos do módulo serão armazenados em `alfabetizacao_no_brasil/dados/brutos/`.
+- Um único ambiente virtual local, `.venv`, será mantido na raiz do projeto guarda-chuva e excluído do versionamento.
 
 ## Arquitetura atual
 
@@ -104,11 +107,11 @@ Power BI
 Streamlit posteriormente
 ```
 
-No estado atual, apenas o versionamento com Git e a documentação inicial foram iniciados. A arquitetura será implementada incrementalmente, conforme as necessidades de cada etapa.
+No estado atual, o versionamento com Git, a documentação inicial, o módulo `alfabetizacao_no_brasil/` e o ambiente virtual local foram iniciados. A arquitetura será implementada incrementalmente, conforme as necessidades de cada etapa.
 
 ## Status
 
-Estruturação inicial.
+Preparação da primeira extração reproduzível do SIDRA.
 
 ## Entregas concluídas
 
@@ -118,18 +121,22 @@ Estruturação inicial.
 - aprovação da matriz inicial de extração;
 - definição da arquitetura suficiente;
 - inicialização do repositório Git local;
-- criação da memória operacional do projeto.
+- criação da memória operacional do projeto;
+- documentação dos parâmetros oficiais das tabelas SIDRA 9542 e 9543;
+- validação das consultas nacionais mínimas das tabelas 9542 e 9543;
+- validação da identidade entre total, alfabetizadas e não alfabetizadas;
+- comparação da taxa calculada com a taxa oficial;
+- organização do primeiro módulo em `alfabetizacao_no_brasil/`;
+- criação do ambiente virtual local com Python 3.13.
 
 ## Pendências
 
 - preparar a extração mínima e reproduzível do SIDRA;
-- confirmar na API do SIDRA os códigos das variáveis e categorias aprovadas;
 - definir o formato e a convenção de nomes dos arquivos brutos;
-- criar somente as pastas necessárias para a etapa de extração;
 - extrair e preservar os primeiros dados brutos;
 - validar valores, categorias, granularidade e cobertura territorial;
 - documentar cada decisão à medida que for tomada.
 
 ## Próximo passo
 
-Preparar a extração mínima e reproduzível do SIDRA, começando pela identificação e validação dos parâmetros necessários na API antes de escrever o extrator completo.
+Implementar e executar a primeira extração reproduzível, limitada às consultas nacionais já validadas das tabelas SIDRA 9542 e 9543.
