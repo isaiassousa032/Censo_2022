@@ -112,7 +112,7 @@ No estado atual, o versionamento com Git, a documentação inicial, o módulo `a
 
 ## Status
 
-Primeira extração nacional e sua validação automatizada concluídas.
+Extrações de Brasil e Grandes Regiões da tabela 9542 concluídas; validação nacional automatizada disponível.
 
 ## Entregas concluídas
 
@@ -135,13 +135,18 @@ Primeira extração nacional e sua validação automatizada concluídas.
 - implementação da validação automatizada do contrato das respostas nacionais;
 - validação da granularidade Brasil/2022, das categorias e das unidades;
 - validação automatizada da identidade dos contingentes e da taxa oficial arredondada;
-- teste de rejeição de uma inconsistência simulada sem alterar os dados brutos.
+- teste de rejeição de uma inconsistência simulada sem alterar os dados brutos;
+- refatoração do extrator para executar uma consulta nomeada por vez;
+- extração bruta da tabela 9542 para as cinco Grandes Regiões;
+- verificação de três categorias, cinco séries por categoria e 15 observações regionais;
+- confirmação de que a extração regional não alterou os arquivos nacionais.
 
 ## Pendências
 
 - ampliar a validação de cobertura territorial quando novos níveis forem extraídos;
+- adaptar o validador para respostas com múltiplas localidades;
 - documentar cada decisão à medida que for tomada.
 
 ## Próximo passo
 
-Revisar o validador nacional e definir a próxima ampliação mínima da extração, começando pelo panorama territorial sem recortes demográficos.
+Revisar a extração regional e adaptar o validador para conferir as cinco Grandes Regiões sem duplicar as regras nacionais.

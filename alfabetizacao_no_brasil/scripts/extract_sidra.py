@@ -1,7 +1,8 @@
-"""Extrai as respostas nacionais mínimas das tabelas SIDRA 9542 e 9543."""
+"""Extrai respostas brutas previamente definidas das tabelas SIDRA."""
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -14,8 +15,8 @@ TIMEOUT_SECONDS = 30
 MODULE_DIR = Path(__file__).resolve().parents[1]
 OUTPUT_DIR = MODULE_DIR / "dados" / "brutos" / "sidra"
 
-QUERIES = (
-    {
+QUERIES = {
+    "9542_brasil_total": {
         "endpoint": (
             "https://servicodados.ibge.gov.br/api/v3/agregados/9542/"
             "periodos/2022/variaveis/950"
@@ -28,7 +29,7 @@ QUERIES = (
         },
         "filename": "9542_2022_brasil_total.json",
     },
-    {
+    "9543_brasil_total": {
         "endpoint": (
             "https://servicodados.ibge.gov.br/api/v3/agregados/9543/"
             "periodos/2022/variaveis/2513"
@@ -39,7 +40,33 @@ QUERIES = (
         },
         "filename": "9543_2022_brasil_total.json",
     },
-)
+    "9542_regioes_total": {
+        "endpoint": (
+            "https://servicodados.ibge.gov.br/api/v3/agregados/9542/"
+            "periodos/2022/variaveis/950"
+        ),
+        "parameters": {
+            "localidades": "N2[all]",
+            "classificacao": (
+                "59[93024,1023,1024]|2[6794]|86[95251]|287[100362]"
+            ),
+        },
+        "filename": "9542_2022_regioes_total.json",
+    },
+}
+
+
+def parse_args() -> argparse.Namespace:
+    """Lê a chave da consulta que deverá ser executada."""
+    parser = argparse.ArgumentParser(
+        description="Extrai uma resposta bruta do SIDRA sem sobrescrever arquivos."
+    )
+    parser.add_argument(
+        "query",
+        choices=QUERIES,
+        help="consulta cadastrada que será executada",
+    )
+    return parser.parse_args()
 
 
 def build_url(endpoint: str, parameters: dict[str, str]) -> str:
@@ -75,24 +102,20 @@ def write_new_file(destination: Path, content: bytes) -> None:
 
 
 def main() -> int:
-    """Executa as duas consultas validadas e preserva suas respostas brutas."""
+    """Executa somente a consulta escolhida e preserva sua resposta bruta."""
+    args = parse_args()
+    query = QUERIES[args.query]
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    destinations = [OUTPUT_DIR / query["filename"] for query in QUERIES]
-    existing_files = [path for path in destinations if path.exists()]
-    if existing_files:
-        names = ", ".join(path.name for path in existing_files)
-        print(f"Extração cancelada: arquivo(s) já existente(s): {names}", file=sys.stderr)
+    destination = OUTPUT_DIR / query["filename"]
+    if destination.exists():
+        print(f"Extração cancelada: arquivo já existente: {destination.name}", file=sys.stderr)
         return 1
 
-    responses: list[tuple[Path, bytes]] = []
-    for query, destination in zip(QUERIES, destinations, strict=True):
-        url = build_url(query["endpoint"], query["parameters"])
-        responses.append((destination, fetch_json_bytes(url)))
-
-    for destination, content in responses:
-        write_new_file(destination, content)
-        print(f"Gravado: {destination.relative_to(MODULE_DIR)} ({len(content)} bytes)")
+    url = build_url(query["endpoint"], query["parameters"])
+    content = fetch_json_bytes(url)
+    write_new_file(destination, content)
+    print(f"Gravado: {destination.relative_to(MODULE_DIR)} ({len(content)} bytes)")
 
     return 0
 
