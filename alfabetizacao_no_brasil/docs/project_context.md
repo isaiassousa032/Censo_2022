@@ -112,7 +112,7 @@ No estado atual, o versionamento com Git, a documentação inicial, o módulo `a
 
 ## Status
 
-Primeira extração nacional reproduzível concluída e em revisão.
+Primeira extração nacional e sua validação automatizada concluídas.
 
 ## Entregas concluídas
 
@@ -131,13 +131,17 @@ Primeira extração nacional reproduzível concluída e em revisão.
 - criação do ambiente virtual local com Python 3.13;
 - implementação do extrator mínimo com a biblioteca padrão do Python;
 - preservação das respostas nacionais brutas das tabelas SIDRA 9542 e 9543;
-- verificação da proteção contra sobrescrita dos arquivos brutos.
+- verificação da proteção contra sobrescrita dos arquivos brutos;
+- implementação da validação automatizada do contrato das respostas nacionais;
+- validação da granularidade Brasil/2022, das categorias e das unidades;
+- validação automatizada da identidade dos contingentes e da taxa oficial arredondada;
+- teste de rejeição de uma inconsistência simulada sem alterar os dados brutos.
 
 ## Pendências
 
-- validar valores, categorias, granularidade e cobertura territorial;
+- ampliar a validação de cobertura territorial quando novos níveis forem extraídos;
 - documentar cada decisão à medida que for tomada.
 
 ## Próximo passo
 
-Revisar a primeira extração e definir a menor validação automatizada necessária antes de ampliar a cobertura territorial e demográfica.
+Revisar o validador nacional e definir a próxima ampliação mínima da extração, começando pelo panorama territorial sem recortes demográficos.
