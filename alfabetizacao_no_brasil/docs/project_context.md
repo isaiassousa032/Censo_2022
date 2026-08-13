@@ -85,6 +85,7 @@ Nesta etapa, não serão incluídos:
 - Novos cruzamentos, tecnologias e estruturas somente serão adicionados quando uma pergunta analítica concreta os justificar.
 - O primeiro módulo será mantido em `alfabetizacao_no_brasil/`, de forma isolada dos futuros estudos do projeto guarda-chuva.
 - Os arquivos brutos do módulo serão armazenados em `alfabetizacao_no_brasil/dados/brutos/`.
+- As respostas brutas do SIDRA serão preservadas em JSON, sem normalização, com nomes que identifiquem tabela, período, território e recorte.
 - Um único ambiente virtual local, `.venv`, será mantido na raiz do projeto guarda-chuva e excluído do versionamento.
 
 ## Arquitetura atual
@@ -111,7 +112,7 @@ No estado atual, o versionamento com Git, a documentação inicial, o módulo `a
 
 ## Status
 
-Preparação da primeira extração reproduzível do SIDRA.
+Primeira extração nacional reproduzível concluída e em revisão.
 
 ## Entregas concluídas
 
@@ -127,16 +128,16 @@ Preparação da primeira extração reproduzível do SIDRA.
 - validação da identidade entre total, alfabetizadas e não alfabetizadas;
 - comparação da taxa calculada com a taxa oficial;
 - organização do primeiro módulo em `alfabetizacao_no_brasil/`;
-- criação do ambiente virtual local com Python 3.13.
+- criação do ambiente virtual local com Python 3.13;
+- implementação do extrator mínimo com a biblioteca padrão do Python;
+- preservação das respostas nacionais brutas das tabelas SIDRA 9542 e 9543;
+- verificação da proteção contra sobrescrita dos arquivos brutos.
 
 ## Pendências
 
-- preparar a extração mínima e reproduzível do SIDRA;
-- definir o formato e a convenção de nomes dos arquivos brutos;
-- extrair e preservar os primeiros dados brutos;
 - validar valores, categorias, granularidade e cobertura territorial;
 - documentar cada decisão à medida que for tomada.
 
 ## Próximo passo
 
-Implementar e executar a primeira extração reproduzível, limitada às consultas nacionais já validadas das tabelas SIDRA 9542 e 9543.
+Revisar a primeira extração e definir a menor validação automatizada necessária antes de ampliar a cobertura territorial e demográfica.
